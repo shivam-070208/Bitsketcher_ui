@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "SpinningRingsLoader",
+  "type": "registry:block",
+  "title": "SpinningRingsLoader",
+  "description": "A simple spinning rings loader component.",
+  "dependencies": [
+    "react",
+    "three",
+    "motion",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ],
+  "files": [
+    {
+      "path": "src/components/bitsketcher_ui/loaders/SpinningRingsLoader.tsx",
+      "content": "\"use client\";\r\nimport { Canvas, useFrame } from \"@react-three/fiber\";\r\nimport { useRef } from \"react\";\r\nimport * as THREE from \"three\";\r\n\r\nconst SpinningRings = () => {\r\n  const ringRef1 = useRef<THREE.Mesh>(null);\r\n  const ringRef2 = useRef<THREE.Mesh>(null);\r\n  const ringRef3 = useRef<THREE.Mesh>(null);\r\n\r\n  // Use useFrame to rotate the rings\r\n  useFrame(({ clock }) => {\r\n    if (ringRef1.current) {\r\n      ringRef1.current.rotation.x = clock.elapsedTime * 0.5;\r\n      ringRef1.current.rotation.y = clock.elapsedTime * 0.3;\r\n    }\r\n    if (ringRef2.current) {\r\n      ringRef2.current.rotation.x = clock.elapsedTime * 0.7;\r\n      ringRef2.current.rotation.y = clock.elapsedTime * 0.5;\r\n    }\r\n    if (ringRef3.current) {\r\n      ringRef3.current.rotation.x = clock.elapsedTime * 1.0;\r\n      ringRef3.current.rotation.y = clock.elapsedTime * 0.8;\r\n    }\r\n  });\r\n\r\n  return (\r\n    <>\r\n      <mesh ref={ringRef1}>\r\n        <torusGeometry args={[0.6, 0.05, 16, 100]} /> {/* Scaled down ring */}\r\n        <meshStandardMaterial color=\"cyan\" />\r\n      </mesh>\r\n      <mesh ref={ringRef2}>\r\n        <torusGeometry args={[0.8, 0.05, 16, 100]} /> {/* Scaled down ring */}\r\n        <meshStandardMaterial color=\"magenta\" />\r\n      </mesh>\r\n      <mesh ref={ringRef3}>\r\n        <torusGeometry args={[1.0, 0.05, 16, 100]} /> {/* Scaled down ring */}\r\n        <meshStandardMaterial color=\"yellow\" />\r\n      </mesh>\r\n    </>\r\n  );\r\n};\r\n\r\nexport default function SpinningRingsLoader() {\r\n  return (\r\n    <Canvas camera={{ position: [0, 0, 4] }} style={{ width: \"100%\", height: \"100vh\" }}>\r\n      <ambientLight intensity={0.5} />\r\n      <directionalLight position={[5, 5, 5]} />\r\n      <SpinningRings />\r\n    </Canvas>\r\n  );\r\n}\r\n",
+      "type": "registry:component"
+    }
+  ]
+}

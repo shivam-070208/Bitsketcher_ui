@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "BouncingCubesLoader",
+  "type": "registry:block",
+  "title": "BouncingCubesLoader",
+  "description": "A simple bouncing cubes loader component.",
+  "dependencies": [
+    "react",
+    "three",
+    "motion",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ],
+  "files": [
+    {
+      "path": "src/components/bitsketcher_ui/loaders/BouncingCubesLoader.tsx",
+      "content": "\"use client\"\r\nimport { Canvas, useFrame } from '@react-three/fiber';\r\nimport { motion } from 'framer-motion';\r\nimport { useRef } from 'react';\r\n\r\nfunction BouncingCube({ delay = 0,x=0 }) {\r\n    const ref = useRef(null);\r\n  useFrame(({ clock }) => {\r\n    if (ref.current) {\r\n    \r\n      ref.current.position.y = Math.abs(Math.sin(clock.getElapsedTime() * 2 + delay*10000.0)) ;\r\n      ref.current.rotation.x+=Math.abs(Math.sin(clock.getDelta() +x* delay)) ;\r\n      ref.current.rotation.y+=Math.abs(Math.sin(clock.getDelta()  + delay)) ;\r\n    }\r\n  });\r\n\r\n  return (\r\n    <mesh ref={ref} >\r\n      <boxGeometry args={[0.5, 0.5, 0.5]} />\r\n      <meshStandardMaterial color=\"#40e0d0\" />\r\n    </mesh>\r\n  );\r\n}\r\n\r\nexport default function BouncingCubesLoader() {\r\n  return (\r\n    <Canvas camera={{ position: [0, 0, 5] }} className='w-full h-full'>\r\n      <ambientLight />\r\n      <BouncingCube x={-1}  delay={0.00005} />\r\n      <BouncingCube x={0} delay={0.00003} />\r\n      <BouncingCube x={1} delay={0.000002} />\r\n    </Canvas>\r\n  );\r\n}",
+      "type": "registry:component"
+    }
+  ]
+}

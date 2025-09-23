@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "MorphingShapeLoader",
+  "type": "registry:block",
+  "title": "MorphingShapeLoader",
+  "description": "A simple morphing shape loader component.",
+  "dependencies": [
+    "react",
+    "three",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ],
+  "files": [
+    {
+      "path": "src/components/bitsketcher_ui/loaders/MorphingShapeLoader.tsx",
+      "content": "\"use client\"\r\n\r\nimport { Canvas, useFrame } from '@react-three/fiber';\r\nimport { useRef, useState } from 'react';\r\nimport { IcosahedronGeometry, MeshStandardMaterial, DirectionalLight, Vector3 } from 'three';\r\n\r\nfunction MorphingShape() {\r\n  const meshRef = useRef(null);\r\n  const lightRef = useRef(null);\r\n\r\n  // Scale animation state\r\n  const [scaleFactor, setScaleFactor] = useState(1);\r\n\r\n  useFrame(() => {\r\n    // Simple scale animation (pulse effect)\r\n    const time = Date.now() * 0.002;\r\n    if (meshRef.current) {\r\n      meshRef.current.scale.set(\r\n         Math.sin(time) * 0.2+0.3,  // Sinusoidal scale animation\r\n         Math.cos(time) * 0.2+0.3,\r\n     Math.sin(time) * 0.2+0.3\r\n      );\r\n    }\r\n\r\n    // Animating the directional light position\r\n    if (lightRef.current) {\r\n      lightRef.current.position.set(\r\n        Math.sin(time * 0.3) * 5,   // Light moves in a sine wave pattern\r\n        3,\r\n        Math.cos(time * 0.3) * 5\r\n      );\r\n      lightRef.current.target.position.set(0, 0, 0); // Always point towards the center of the object\r\n      lightRef.current.target.updateMatrixWorld(); // Update the light's target matrix\r\n    }\r\n  });\r\n\r\n  return (\r\n    <>\r\n      <mesh ref={meshRef} scale={[0.2,0.2,0.2]}>\r\n        <icosahedronGeometry args={[0.7, 0]} />\r\n        <meshStandardMaterial color=\"#a3a3a3\" metalness={2.0} roughness={1.4} />\r\n      </mesh>\r\n\r\n      {/* Directional light */}\r\n      <directionalLight\r\n        ref={lightRef}\r\n        intensity={1.2}\r\n        color=\"#ffffff\"\r\n        position={[5, 5, 5]}\r\n        castShadow\r\n      />\r\n    </>\r\n  );\r\n}\r\n\r\nexport default function MorphingShapeLoader() {\r\n  return (\r\n    <Canvas\r\n      camera={{ position: [0, 0, 3] }}\r\n      shadows\r\n    >\r\n      {/* Ambient light for softer lighting */}\r\n      <ambientLight  color=\"#ffffff\" />\r\n\r\n      {/* Add the animated object */}\r\n      <MorphingShape />\r\n\r\n      {/* Optional: Set up a helper to visualize the directional light's shadow */}\r\n    \r\n    </Canvas>\r\n  );\r\n}\r\n",
+      "type": "registry:component"
+    }
+  ]
+}

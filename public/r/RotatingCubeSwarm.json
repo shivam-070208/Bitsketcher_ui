@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "RotatingCubeSwarm",
+  "type": "registry:block",
+  "title": "RotatingCubeSwarm",
+  "description": "A simple rotating cube swarm loader component.",
+  "dependencies": [
+    "react",
+    "three",
+    "motion",
+    "@react-three/fiber",
+    "@react-three/drei"
+  ],
+  "files": [
+    {
+      "path": "src/components/bitsketcher_ui/loaders/RotatingCubeSwarm.tsx",
+      "content": "\"use client\"\r\nimport { Canvas, useFrame } from '@react-three/fiber';\r\nimport { useRef } from 'react';\r\n\r\nfunction RotatingCube({ delay = 0, x = 0 }) {\r\n  const ref = useRef(null);\r\n\r\n  useFrame(({ clock }) => {\r\n    if (ref.current) {\r\n      const t = clock.getElapsedTime();\r\n      ref.current.rotation.x += Math.sin(t * 2 + delay) * 0.1;\r\n      ref.current.rotation.y += Math.cos(t * 2 + delay) * 0.1;\r\n      ref.current.position.x = Math.sin(t + x) * 2;\r\n      ref.current.position.z = Math.cos(t + x) * 2;\r\n    }\r\n  });\r\n\r\n  return (\r\n    <mesh ref={ref} position={[x, 0, 0]}>\r\n      <boxGeometry args={[0.5, 0.5, 0.5]} />\r\n      <meshStandardMaterial color=\"#008080\" />\r\n    </mesh>\r\n  );\r\n}\r\n\r\nexport default function RotatingCubesSwarm() {\r\n  return (\r\n    <Canvas camera={{ position: [0, 0, 5] }} style={{ width: \"100%\", height: \"100vh\" }}>\r\n      <ambientLight />\r\n      <directionalLight position={[5, 5, 5]} />\r\n      <RotatingCube x={-1} delay={0.1} />\r\n      <RotatingCube x={0} delay={0.3} />\r\n      <RotatingCube x={1} delay={0.5} />\r\n    </Canvas>\r\n  );\r\n}\r\n",
+      "type": "registry:component"
+    }
+  ]
+}
