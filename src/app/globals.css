@@ -1,2 +1,11 @@
 @import "tailwindcss";
 
+ @font-face {
+          font-family: 'Inter';
+          src: url('https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2');
+          font-style: normal;
+        }
+
+.Inter {
+    font-family: 'Inter', sans-serif;
+}

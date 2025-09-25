@@ -16,7 +16,7 @@ const SplitWavyText: React.FC<SplitWavyTextProps> = ({
   cn=""
 }) => {
   return (
-    <div className={"flex  text-8xl font-bold" + " "+ cn}>
+    <div className={"flex " + " "+ cn}>
       {text.split("").map((char, index) => (
         <motion.span
           key={index}
