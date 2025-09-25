@@ -12,7 +12,6 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { ReactThreeFiber } from "@react-three/fiber";
 
-
 // GLSL Shaders
 const vertexShader = `
 uniform float time;
@@ -56,7 +55,7 @@ void main() {
 
 // Create the custom material
 const AnimatedShaderMaterial = shaderMaterial(
-  { time: 0, texturet: null,speed:2.0,waves:1.0 },
+  { time: 0, texturet: null, speed: 2.0, waves: 1.0 },
   vertexShader,
   fragmentShader
 );
@@ -75,25 +74,40 @@ declare module "@react-three/fiber" {
 }
 
 interface CardProps {
-  imageUrl: string; 
-  speed?:number;
-  waves?:number;
-  scale?:number
+  imageUrl: string;
+  speed?: number;
+  waves?: number;
+  scale?: number;
+  cn?: string;
 }
 
-export default function WaveCard({ imageUrl,speed=2.9,waves=1.0 ,scale=1.0}: CardProps) {
+export default function WaveCard({
+  imageUrl,
+  speed = 2.9,
+  waves = 1.0,
+  scale = 1.0,
+  cn = "",
+}: CardProps) {
   return (
-    <Canvas camera={{ position: [0, 0, 5] }} >
+    <Canvas
+      camera={{ position: [0, 0, 5] }}
+      className={cn + " " + "w-full h-full hover:saturate-200"}
+    >
       <ambientLight intensity={0.5} />
       <directionalLight position={[0, 2, 2]} />
       <OrbitControls enableZoom={false} />
-    
-      <AnimatedCard waves={waves} scale={scale} imageUrl={imageUrl} speed={speed} />
+
+      <AnimatedCard
+        waves={waves}
+        scale={scale}
+        imageUrl={imageUrl}
+        speed={speed}
+      />
     </Canvas>
   );
 }
 
-function AnimatedCard({ imageUrl,speed=2.0 ,waves,scale }: CardProps) {
+function AnimatedCard({ imageUrl, speed = 2.0, waves, scale }: CardProps) {
   const meshRef = useRef<THREE.Mesh>(null!);
   const { size } = useThree(); // Access the canvas size from the context
 
@@ -113,12 +127,29 @@ function AnimatedCard({ imageUrl,speed=2.0 ,waves,scale }: CardProps) {
   const height = size.height;
 
   return (
-    <mesh ref={meshRef}>
+    <mesh
+      onPointerEnter={(e) =>
+        (document.documentElement.style.cssText = "cursor:pointer;")
+      }
+      onPointerLeave={(e) =>
+        (document.documentElement.style.cssText = "cursor:default;")
+      }
+      ref={meshRef}
+    >
       {/* Adjust box size to match the canvas size */}
-      <boxGeometry args={[scale*width / 110, scale*height / 110, 0.2,10,20]}  />{" "}
+      <boxGeometry
+        args={[(scale! * width) / 110, (scale! * height) / 110, 0.2, 10, 20]}
+      />{" "}
       {/* Adjust the scale */}
       {/* Pass the texture to the shader material */}
-      <animatedShaderMaterial m attach="material" waves={waves} time={0} speed={speed} texturet={texture} />
+
+      <animatedShaderMaterial
+        attach="material"
+        waves={waves}
+        time={0}
+        speed={speed}
+        texturet={texture}
+      />
     </mesh>
   );
 }
