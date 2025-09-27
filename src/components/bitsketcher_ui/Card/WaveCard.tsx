@@ -7,6 +7,7 @@ import {
   useLoader,
   useThree,
 } from "@react-three/fiber";
+
 import { OrbitControls, shaderMaterial, Wireframe } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef } from "react";
@@ -64,14 +65,7 @@ const AnimatedShaderMaterial = shaderMaterial(
 extend({ AnimatedShaderMaterial });
 
 // Type Augmentation for JSX.IntrinsicElements
-declare module "@react-three/fiber" {
-  interface IntrinsicElements {
-    animatedShaderMaterial: ReactThreeFiber.Object3DNode<
-      typeof AnimatedShaderMaterial,
-      typeof AnimatedShaderMaterial
-    >;
-  }
-}
+
 
 interface CardProps {
   imageUrl: string;
