@@ -72,7 +72,7 @@ const MorphingText = ({
       ref={containerRef}
       onMouseLeave={() => setMousePosition(null)}
       onMouseMove={getPosition}
-      className={cn(className, "font-light  uppercase flex")}
+      className={cn(className, " uppercase flex")}
     >
       {Text.split("").map((value, index) => {
         const scale = mousePosition && letterPositions[index]
@@ -83,16 +83,16 @@ const MorphingText = ({
           <motion.span
             key={index}
             ref={(el) => (letterRefs.current[index] = el)}
-            animate={{ scaleX: scale, rotateZ: (scale - 1), marginRight: `${(scale-1 ) *50}px` }} // Rotate a bit based on scale
+            animate={{ scaleX: scale,scaleY:1.0+scale/2, rotateZ: (scale - 1), marginRight: `${(scale - 1) * 50}px` }} // Rotate a bit based on scale
             className="origin-left"
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             {value}
           </motion.span>
         );
-      })}
+      })} 
     </div>
   );
 };
 
-export default MorphingText;
+export default MorphingText; 

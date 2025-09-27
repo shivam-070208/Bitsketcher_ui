@@ -82,7 +82,7 @@
         "@react-three/drei"
       ]
     },
-      {
+    {
       "name": "SpinningRingsLoader",
       "type": "registry:block",
       "title": "SpinningRingsLoader",
@@ -98,6 +98,104 @@
         "react",
         "three",
         "motion",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ]
+    },
+    {
+      "name": "MorphingText",
+      "type": "registry:block",
+      "title": "MorphingText",
+      "description": "An interactive text component that morphs and scales letters based on mouse position.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Text/MorphingText.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "framer-motion"
+      ]
+    },
+    {
+      "name": "SplitWavyText",
+      "type": "registry:block",
+      "title": "SplitWavyText",
+      "description": "A text animation component that creates a wavy reveal effect with split characters.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Text/SplitWavyText.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "motion"
+      ]
+    },
+    {
+      "name": "ScrollFadeInScaleText",
+      "type": "registry:block",
+      "title": "ScrollFadeInScaleText",
+      "description": "A scroll-based animation component that fades and scales text based on scroll position.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Text/ScrollFadeInScaleText .tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "framer-motion"
+      ]
+    },
+    {
+      "name": "ScrollFlipRevealText",
+      "type": "registry:block",
+      "title": "ScrollFlipRevealText",
+      "description": "A scroll-triggered text animation with 3D flip reveal effect.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Text/ScrollFlipRevealText.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "motion"
+      ]
+    },
+    {
+      "name": "WordByWordScroll",
+      "type": "registry:block",
+      "title": "WordByWordScroll",
+      "description": "A scroll-based text animation that reveals words one by one with blur effects.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Text/WordByWordScroll .tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "motion"
+      ]
+    },
+    {
+      "name": "WaveCard",
+      "type": "registry:block",
+      "title": "WaveCard",
+      "description": "A 3D card component with wave shader effects and image texture support.",
+      "files": [
+        {
+          "path": "src/components/bitsketcher_ui/Card/WaveCard.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "dependencies": [
+        "react",
+        "three",
         "@react-three/fiber",
         "@react-three/drei"
       ]
