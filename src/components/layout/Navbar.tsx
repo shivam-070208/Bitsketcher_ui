@@ -33,8 +33,9 @@ const Navbar = () => {
   return (
     <div
       className={cn(
-        "fixed top-0 w-screen  py-3 backdrop-blur-md",
+        "fixed top-0 w-screen  py-3 backdrop-blur-[6px] ",
         "border-secondary border-b border-dashed",
+        "z-[999]"
       )}
     >
       <Container
@@ -75,14 +76,14 @@ const Navbar = () => {
                 )}
               >
                 {name}
-                {hovered === name && (
+                {hovered == name && (
                   <motion.div
-                    layoutId="movablespan"
+                    layoutId="movablespan" 
                     className={cn(
                       "absolute top-0 left-0 -z-1 h-full w-full shadow-xs backdrop-blur-md",
                       "bg-secondary/20 shadow-secondary",
                     )}
-                  />
+                  ></motion.div>
                 )}
               </Link>
             ))}

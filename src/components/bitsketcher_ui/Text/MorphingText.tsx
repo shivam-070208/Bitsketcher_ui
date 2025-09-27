@@ -14,14 +14,13 @@ interface Props {
 type Position = {
   x: number;
   y: number;
-  
 };
 
 const MorphingText = ({
   Text,
   Scalefactor = 3.0,
   className = "",
-  EffectLength = 100
+  EffectLength = 100,
 }: Props) => {
   const [mousePosition, setMousePosition] = useState<Position | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -65,34 +64,38 @@ const MorphingText = ({
     return Math.max(1.0, Math.min(Scalefactor, scale));
   };
 
-
-
   return (
     <div
       ref={containerRef}
       onMouseLeave={() => setMousePosition(null)}
       onMouseMove={getPosition}
-      className={cn(className, " uppercase flex")}
+      className={cn(className, "flex uppercase")}
     >
       {Text.split("").map((value, index) => {
-        const scale = mousePosition && letterPositions[index]
-          ? getScale(letterPositions[index])
-          : 1.0;
+        const scale =
+          mousePosition && letterPositions[index]
+            ? getScale(letterPositions[index])
+            : 1.0;
 
         return (
           <motion.span
             key={index}
             ref={(el) => (letterRefs.current[index] = el)}
-            animate={{ scaleX: scale,scaleY:1.0+scale/2, rotateZ: (scale - 1), marginRight: `${(scale - 1) * 50}px` }} // Rotate a bit based on scale
+            animate={{
+              scaleX: scale*1.3,
+              scaleY: 1.0 + scale / 2,
+              rotateZ: scale - 1,
+              marginRight: `${(scale - 1) * 60}px`,
+            }} // Rotate a bit based on scale
             className="origin-left"
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             {value}
           </motion.span>
         );
-      })} 
+      })}
     </div>
   );
 };
 
-export default MorphingText; 
+export default MorphingText;

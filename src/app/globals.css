@@ -1,7 +1,15 @@
+ @font-face {
+          font-family: 'Inter';
+          src: url('https://res.cloudinary.com/dr6lvwubh/raw/upload/v1529908256/CompressaPRO-GX.woff2');
+          font-style: normal;
+          font-family: 100;
+        }
+
+
 @import "tailwindcss";
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 *{
-  @apply transition-all duration-50 ease-initial;
+  @apply transition-all duration-50 ease-initial origin-top;
 }
 :root {
   --primary: var(--color-white);
@@ -17,4 +25,8 @@
   --primary: var(--color-black);
   --secondary: var(--color-zinc-400);
   --foreground: var(--color-white);
+}
+.Inter {
+    font-family: 'Inter', sans-serif;
+  font-weight: 100;
 }
