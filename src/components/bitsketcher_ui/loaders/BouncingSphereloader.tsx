@@ -1,9 +1,10 @@
 "use client"
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
+import { Mesh } from 'three';
 
 function BouncingSphere({ delay = 0, x = 0 }) {
-  const ref = useRef(null);
+  const ref = useRef<Mesh>(null!);
 
   useFrame(({ clock }) => {
     if (ref.current) {

@@ -2,9 +2,10 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { motion } from 'framer-motion';
 import { useRef } from 'react';
+import * as THREE from 'three';
 
 function BouncingCube({ delay = 0,x=0 }) {
-    const ref = useRef(null);
+    const ref = useRef<THREE.Mesh>(null!);
   useFrame(({ clock }) => {
     if (ref.current) {
     

@@ -2,8 +2,8 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 const cn = (...props: string[]): string => props.join(" ");
-const WordByWordScroll = ({ Text, className = "" }: Props) => {
-  const words = Text.split(" ");
+const WordByWordScroll = ({ Text, className = "" }: {Text:string, className?:string}) => {
+  const words:string[] = Text.split(" ");
   return (
     <motion.div  className={cn(className, "flex flex-wrap")}>
       {words.map((word, index) => (

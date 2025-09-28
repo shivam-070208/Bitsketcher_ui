@@ -2,11 +2,11 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef, useState } from 'react';
-import { IcosahedronGeometry, MeshStandardMaterial, DirectionalLight, Vector3 } from 'three';
+import { IcosahedronGeometry, MeshStandardMaterial, DirectionalLight, Vector3,Mesh } from 'three';
 
 function MorphingShape() {
-  const meshRef = useRef(null);
-  const lightRef = useRef(null);
+  const meshRef = useRef<Mesh>(null!);
+  const lightRef = useRef<DirectionalLight>(null!);
 
   // Scale animation state
   const [scaleFactor, setScaleFactor] = useState(1);
