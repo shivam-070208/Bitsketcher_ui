@@ -1,6 +1,9 @@
 import Container from "@/components/layout/Container";
 import HeroicSection from "@/components/layout/Heroic";
 import Navbar from "@/components/layout/Navbar";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import StatsSection from "@/components/sections/StatsSection";
+import CTASection from "@/components/sections/CTASection";
 import { cn } from "@/lib/utils";
 import { Viewport } from "next";
 
@@ -24,12 +27,14 @@ export default function Home() {
       <Container
         className={cn(
           "border-secondary bg-primary border-x border-dashed ",
-          "h-fit py-20",
+          "h-fit pt-20",
         )}
       >
         <HeroicSection />
+        <FeaturesSection />
+        <StatsSection />     
+        <CTASection />
       </Container>
-     
     </div>
   );
 }

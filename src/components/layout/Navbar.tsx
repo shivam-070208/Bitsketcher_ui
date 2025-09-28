@@ -78,12 +78,13 @@ const Navbar = () => {
                 {name}
                 {hovered == name && (
                   <motion.div
+                  transition={{ease:"linear"}}
                     layoutId="movablespan" 
                     className={cn(
-                      "absolute top-0 left-0 -z-1 h-full w-full shadow-xs backdrop-blur-md",
+                      "absolute top-0 left-0 transition-none! -z-1 h-full w-full shadow-xs backdrop-blur-md",
                       "bg-secondary/20 shadow-secondary",
                     )}
-                  ></motion.div>
+                  />
                 )}
               </Link>
             ))}

@@ -1,0 +1,6 @@
+{
+    "workbench.secondarySideBar.showLabels": true,
+    "workbench.activityBar.location": "default",
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "workbench.activityBar.orientation": "vertical"
+}
