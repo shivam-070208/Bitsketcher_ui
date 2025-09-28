@@ -66,6 +66,14 @@ extend({ AnimatedShaderMaterial });
 
 // Type Augmentation for JSX.IntrinsicElements
 
+declare module "@react-three/fiber" {
+  interface IntrinsicElements {
+    animatedShaderMaterial: ReactThreeFiber<
+      typeof AnimatedShaderMaterial,
+      typeof AnimatedShaderMaterial
+    >;
+  }
+}
 
 interface CardProps {
   imageUrl: string;
