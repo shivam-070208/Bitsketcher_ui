@@ -64,16 +64,6 @@ const AnimatedShaderMaterial = shaderMaterial(
 // Extend it into JSX elements
 extend({ AnimatedShaderMaterial });
 
-// Type Augmentation for JSX.IntrinsicElements
-
-declare module "@react-three/fiber" {
-  interface IntrinsicElements {
-    animatedShaderMaterial: ReactThreeFiber<
-      typeof AnimatedShaderMaterial,
-      typeof AnimatedShaderMaterial
-    >;
-  }
-}
 
 interface CardProps {
   imageUrl: string;
@@ -116,10 +106,17 @@ function AnimatedCard({ imageUrl, speed = 2.0, waves, scale }: CardProps) {
   // Load the image texture
   const texture = useLoader(THREE.TextureLoader, imageUrl);
 
+  // Create the shader material
+  const material = new AnimatedShaderMaterial({
+    waves,
+    time: 0,
+    speed,
+    texturet: texture,
+  });
+
   useFrame((state) => {
     if (meshRef.current) {
       // Update shader time uniform
-      const material = meshRef.current.material as THREE.ShaderMaterial;
       material.uniforms.time.value = state.clock.elapsedTime;
     }
   });
@@ -137,20 +134,11 @@ function AnimatedCard({ imageUrl, speed = 2.0, waves, scale }: CardProps) {
         (document.documentElement.style.cssText = "cursor:default;")
       }
       ref={meshRef}
+      material={material}
     >
       {/* Adjust box size to match the canvas size */}
       <boxGeometry
         args={[(scale! * width) / 110, (scale! * height) / 110, 0.2, 10, 20]}
-      />{" "}
-      {/* Adjust the scale */}
-      {/* Pass the texture to the shader material */}
-
-      <animatedShaderMaterial
-        attach="material"
-        waves={waves}
-        time={0}
-        speed={speed}
-        texturet={texture}
       />
     </mesh>
   );
