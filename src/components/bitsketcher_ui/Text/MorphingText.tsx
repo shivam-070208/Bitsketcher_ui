@@ -80,7 +80,9 @@ const MorphingText = ({
         return (
           <motion.span
             key={index}
-            ref={(el) => (letterRefs.current[index] = el)}
+            ref={(el) => {
+              letterRefs.current[index] = el;
+            }}
             animate={{
               scaleX: scale*1.3,
               scaleY: 1.0 + scale / 2,
