@@ -8,10 +8,9 @@ import {
   useThree,
 } from "@react-three/fiber";
 
-import { OrbitControls, shaderMaterial, Wireframe } from "@react-three/drei";
+import { OrbitControls, shaderMaterial } from "@react-three/drei";
 import * as THREE from "three";
 import { useRef } from "react";
-import { ReactThreeFiber } from "@react-three/fiber";
 
 // GLSL Shaders
 const vertexShader = `
@@ -127,10 +126,10 @@ function AnimatedCard({ imageUrl, speed = 2.0, waves, scale }: CardProps) {
 
   return (
     <mesh
-      onPointerEnter={(e) =>
+      onPointerEnter={() =>
         (document.documentElement.style.cssText = "cursor:pointer;")
       }
-      onPointerLeave={(e) =>
+      onPointerLeave={() =>
         (document.documentElement.style.cssText = "cursor:default;")
       }
       ref={meshRef}
