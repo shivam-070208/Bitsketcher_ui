@@ -118,8 +118,8 @@ const StatsSection = () => {
         <blockquote className={cn(
           "text-foreground text-xl font-medium mb-4 italic"
         )}>
-          BitSketcher UI has completely transformed how we build interfaces. 
-          The components are beautiful, performant, and incredibly easy to customize.
+         &quot; BitSketcher UI has completely transformed how we build interfaces. 
+          The components are beautiful, performant, and incredibly easy to customize.&quot;
         </blockquote>
         <div className="flex items-center justify-center gap-4">
           <div className={cn(

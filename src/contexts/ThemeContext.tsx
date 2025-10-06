@@ -41,7 +41,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   useEffect(() => {
     if (mounted) {
       // Update document attribute and localStorage
-      document.documentElement.setAttribute('data-theme', theme); // Important for Tailwind dark mode
+      document.documentElement.classList.add( theme);
+      if(theme !=="dark")
+      document.documentElement.classList.remove( "dark"); // Important for Tailwind dark mode
       localStorage.setItem('theme', theme);
     }
   }, [theme, mounted]);

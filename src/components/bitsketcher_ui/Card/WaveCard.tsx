@@ -14,55 +14,34 @@ import { useRef } from "react";
 
 // GLSL Shaders
 const vertexShader = `
-uniform float time;
-uniform float speed;
-uniform float waves;
-
+  uniform float time;
   varying vec2 vUv;
+
   void main() {
     vUv = uv;
-    float wave = sin(position.x*waves+ time * speed)*0.3 ;
-    vec2 guv =  vec2(0.0, wave);
-    vec3 positiond = position;
-    positiond.y+=guv.y;
-    gl_Position = projectionMatrix * modelViewMatrix * vec4(positiond, 1.0);
+    vec3 pos = position;
+    pos.z += sin(pos.x * 5.0 + time) * 0.1;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
   }
 `;
 
 const fragmentShader = `
-precision highp float;
-uniform float speed;
-uniform float time;
-uniform sampler2D texturet;
-varying vec2 vUv;
-
-void main() {
-  // Create wave distortion effect by modifying the Y coordinate over time
-  float wave = sin(vUv.y * 10.0 + vUv.x * 10.0 + time * speed) * 0.05; // Sine wave movement
-
-  // Apply the wave distortion to the texture coordinates
-  vec2 uv = vUv + vec2(0.0, wave);
-    
-  // Sample the texture at the distorted coordinates
-  vec4 color = texture2D(texturet, uv);
-
-  
-
-  // Output the final color with reflection
-  gl_FragColor = vec4(color);
-}
+  varying vec2 vUv;
+  uniform smapler2d texturet;
+  void main() {
+    gl_FragColor = vec4(vUv.x, vUv.y, 1.0, 1.0); // Gradient blue color
+  }
 `;
 
 // Create the custom material
 const AnimatedShaderMaterial = shaderMaterial(
   { time: 0, texturet: null, speed: 2.0, waves: 1.0 },
   vertexShader,
-  fragmentShader
+  fragmentShader,
 );
 
 // Extend it into JSX elements
 extend({ AnimatedShaderMaterial });
-
 
 interface CardProps {
   imageUrl: string;
@@ -76,19 +55,21 @@ export default function WaveCard({
   imageUrl,
   speed = 2.9,
   waves = 1.0,
-  scale = 1.0,
+  scale = 0.8,
   cn = "",
 }: CardProps) {
   return (
     <Canvas
-      camera={{ position: [0, 0, 5] }}
-      className={cn + " " + "w-full h-full hover:saturate-200"}
+      camera={{ position: [0, 0, 4] }}
+      
+      className={cn + " " + "h-full w-full hover:saturate-200 bg-red-400"}
     >
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={2.0} />
       <directionalLight position={[0, 2, 2]} />
       <OrbitControls enableZoom={false} />
-
+    
       <AnimatedCard
+
         waves={waves}
         scale={scale}
         imageUrl={imageUrl}
@@ -125,20 +106,12 @@ function AnimatedCard({ imageUrl, speed = 2.0, waves, scale }: CardProps) {
   const height = size.height;
 
   return (
-    <mesh
-      onPointerEnter={() =>
-        (document.documentElement.style.cssText = "cursor:pointer;")
-      }
-      onPointerLeave={() =>
-        (document.documentElement.style.cssText = "cursor:default;")
-      }
-      ref={meshRef}
-      material={material}
-    >
-      {/* Adjust box size to match the canvas size */}
-      <boxGeometry
-        args={[(scale! * width) / 110, (scale! * height) / 110, 0.2, 10, 20]}
-      />
-    </mesh>
+    <group position={[0,0,0]}>
+      <mesh material={material}>
+        {/* Adjust box size to match the canvas size */}
+        <planeGeometry   args={[(scale! * width) / 110, (scale! * height) / 110, 10, 10]} />
+       
+      </mesh>
+    </group>
   );
 }

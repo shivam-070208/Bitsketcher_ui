@@ -5,7 +5,7 @@ import FeaturesSection from "@/components/sections/FeaturesSection";
 import StatsSection from "@/components/sections/StatsSection";
 import CTASection from "@/components/sections/CTASection";
 import { cn } from "@/lib/utils";
-import { Viewport } from "next";
+
 
 import React from "react";
 
